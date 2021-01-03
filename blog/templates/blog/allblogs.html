@@ -48,51 +48,35 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-              <a class="nav-item nav-link" href="http://twitter.com/almarcano">Twitter</a>
-              <a class="nav-item nav-link" href="{% static 'resume.pdf'%}">Resume</a>
-              <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+                <a class="nav-item nav-link" href="http://twitter.com/almarcano">Twitter</a>
+                <a class="nav-item nav-link" href="{% static 'resume.pdf'%}">Resume</a>
+                <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
             </div>
           </div>
         </div>
     </nav>
 </header>
 
-<main>
-
-  <section class="jumbotron text-center">
-    <div class="container py5">
-        <h1 class="jumbotron-heading">Hi There!</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-        <p>
-          <a href="mailto:almarcano@gmail.com" class="btn btn-primary my-2">Email Me!</a>
-        </p>
-      <img class="" src="{%  static '02AMG.jpg' %}" widht="300">
+<main role='main'>
+    <div class="container">
+        <h1 class="text-center py-3">Welcome to my BLOG</h1>
+        <h2 class="py-3">Latest Posts</h2>
+        <hr>
+        {% for blog in blogs.all %}
+        <a href="{% url 'detail' blog.id %}"><h5>{{ blog.title }}</h5></a>
+        <h6>{{ blog.pub_date_format }}</h6>
+        <img class="img-fluid" src="{{ blog.image.url }}" alt="" width="300" height="300">
+        <p> {{ blog.summary }}</p>
+        <hr>
+        {% endfor %}
+        <br>
+        <br>
+        <br>
     </div>
-  </section>
-
-  <section>
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
-          {% for job in jobs.all %}
-          <div class="col">
-            <div class="card shadow-sm">
-                <img class="card-img-top" src="{{ job.image.url }}" alt="">
-                <div class="card-body">
-                  <p class="card-text">{{ job.summary }}</p>
-                </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="text-muted">
-  <div class="container text-center">
+  <div class="container-fuid text-center fixed-bottom bg-dark py-3">
     <p>CopyRight ALMARCANO {% now "Y" %}</p>
   </div>
 </footer>
